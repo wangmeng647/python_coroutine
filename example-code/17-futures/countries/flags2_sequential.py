@@ -43,7 +43,8 @@ def download_one(cc, base_url, verbose=False):
         if res.status_code == 404:
             status = HTTPStatus.not_found  # <3>
             msg = 'not found'
-        else:  # <4>
+        else:
+            print(2)# <4>
             raise
     else:
         save_flag(image, cc.lower() + '.gif')

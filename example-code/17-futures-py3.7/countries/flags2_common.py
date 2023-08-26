@@ -26,7 +26,7 @@ SERVERS = {
     'DELAY':  'http://localhost:8002/flags',
     'ERROR':  'http://localhost:8003/flags',
 }
-DEFAULT_SERVER = 'LOCAL'
+DEFAULT_SERVER = 'REMOTE'
 
 DEST_DIR = 'downloads/'
 COUNTRY_CODES_FILE = 'country_codes.txt'
@@ -143,7 +143,7 @@ def main(download_many, default_concur_req, max_concur_req):
     initial_report(cc_list, actual_req, args.server)
     base_url = SERVERS[args.server]
     t0 = time.time()
-    counter = download_many(cc_list, base_url, args.verbose, actual_req)
+    counter = download_many(cc_list, base_url, False, actual_req)
     assert sum(counter.values()) == len(cc_list), \
         'some downloads are unaccounted for'
     final_report(cc_list, counter, t0)

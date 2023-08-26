@@ -29,7 +29,9 @@ MAX_CONCUR_REQ = 1
 # BEGIN FLAGS2_BASIC_HTTP_FUNCTIONS
 def get_flag(base_url, cc):
     url = '{}/{cc}/{cc}.gif'.format(base_url, cc=cc.lower())
+    print('get flag before request')
     resp = requests.get(url)
+    print('get request after request')
     if resp.status_code != 200:  # <1>
         resp.raise_for_status()
     return resp.content
@@ -38,7 +40,9 @@ def get_flag(base_url, cc):
 def download_one(cc, base_url, verbose=False):
     try:
         image = get_flag(base_url, cc)
+        print('print download one try')
     except requests.exceptions.HTTPError as exc:  # <2>
+        print('print download one http error')
         res = exc.response
         if res.status_code == 404:
             status = HTTPStatus.not_found  # <3>
